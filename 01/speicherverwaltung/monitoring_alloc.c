@@ -20,6 +20,7 @@ void init_monitoring_alloc() {
 
   for (size_t i = 0; i < sizeof(MAX_ALLOCATIONS); i+= MAX_ALLOCATIONS) {
     allocated_blocks[i].frame = (char*) monitoring_alloc_malloc(MAX_ALLOCATIONS);
+
   }
 
   for (size_t i = 0; i < sizeof(MAX_ALLOCATIONS); i+= MAX_ALLOCATIONS) {
@@ -32,6 +33,11 @@ void init_monitoring_alloc() {
 
 int shutdown_monitoring_alloc() {
   int leakingBytes = 0;
+
+  for (size_t i = 0; i < sizeof(MAX_ALLOCATIONS); i+= MAX_ALLOCATIONS) {
+    leakingBytes += (char*) monitoring_alloc_malloc(MAX_ALLOCATIONS);
+  }
+
 
   printf("ERROR: Leaking %lu bytes in total!\n",
       (unsigned long)leakingBytes);
