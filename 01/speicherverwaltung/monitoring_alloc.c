@@ -18,9 +18,12 @@ void init_monitoring_alloc() {
 
 
 
-  for (size_t i = 0; i < sizeof(MAX_ALLOCATIONS); i++) {
-    allocated_blocks[i].frame = (char*) monitoring_alloc_malloc(sizeof(MAX_ALLOCATIONS));
-    printf("%s\n", (char*)allocated_blocks[i].size);
+  for (size_t i = 0; i < sizeof(MAX_ALLOCATIONS); i+= MAX_ALLOCATIONS) {
+    allocated_blocks[i].frame = (char*) monitoring_alloc_malloc(MAX_ALLOCATIONS);
+  }
+
+  for (size_t i = 0; i < sizeof(MAX_ALLOCATIONS); i+= MAX_ALLOCATIONS) {
+    monitoring_alloc_free(allocated_blocks[i].frame);
   }
 
 
@@ -37,6 +40,7 @@ int shutdown_monitoring_alloc() {
 
 void *monitoring_alloc_malloc(size_t size) {
   void *allocated = NULL;
+
   malloc(size);
   if(!allocated) {
     printf("ERROR: Block of size %lu could not be allocated!\n",
@@ -47,7 +51,7 @@ void *monitoring_alloc_malloc(size_t size) {
 
 void monitoring_alloc_free(void *ptr) {
   int found = 0;
-  //free(*ptr);
+  free(ptr);
   if(!found) {
     printf("ERROR: Block %p not allocated!\n", ptr);
   }

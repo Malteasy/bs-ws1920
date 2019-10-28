@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <malloc.h>
+//#include <malloc.h>
 
 // Verwendet monitoring_alloc.
 #include "monitoring_alloc.h"
