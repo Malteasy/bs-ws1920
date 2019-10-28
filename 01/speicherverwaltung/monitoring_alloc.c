@@ -15,21 +15,8 @@ AllocatedMemoryBlock allocated_blocks[MAX_ALLOCATIONS];
 // Schreiben Sie hier ihre Implementierung für Aufgabenteil a).
 
 void init_monitoring_alloc() {
-
-  //*allocated_blocks = monitoring_alloc_malloc(allocated_blocks[i]->size);
-
-  for (size_t i = 0; i < MAX_ALLOCATIONS; i+= allocated_blocks[i]->size) {
-    allocated_blocks[i] = monitoring_alloc_malloc(allocated_blocks[i]->size);
-  }
-
-  for (size_t i = 0; i < MAX_ALLOCATIONS; i++) {
-    allocated_blocks[i] = monitoring_alloc_free(allocated_blocks[i]->frame);
-  }
-
-
-
-
-
+  
+  *allocated_blocks = monitoring_alloc_malloc(allocated_blocks->size);
 
 }
 
