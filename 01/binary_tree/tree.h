@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct _node_t {
   int value;
@@ -17,4 +18,3 @@ int binarySearch(node_t *tree, int value);
 
 // free all dynamically allocated memory of tree
 void cleanUpTree(node_t *tree);
-
