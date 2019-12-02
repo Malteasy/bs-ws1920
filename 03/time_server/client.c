@@ -23,40 +23,61 @@ void err(char *msg)
 // create a new socket
 int createSocket()
 {
+
+
   return socket(PF_INET, SOCK_STREAM, 0);
 }
 
 // connect given socket soc to server at "localhost" on port "2342"
 void connectToTimeServer(int soc)
 {
+  struct addrinfo hints, *servinfo;
+  memset(&hints, 0, sizeof hints);
+  hints.ai_family = AF_INET;
+  hints.ai_socktype = SOCK_STREAM;
 
-  struct addrinfo hints, *res; //aus Tut
 
 
-  getaddrinfo("localhost", "2342", &hints, &res);
 
-  if(connect(soc, res->ai_addr, res->ai_addrlen)){ //aus bjees
-    err("no connect");
-  }else{
 
-  }
+
+
+
+  getaddrinfo("localhost", "2342", &hints, &servinfo);
+  soc = socket(servinfo->ai_family, servinfo->ai_socktype, servinfo->ai_protocol);
+  connect(soc, servinfo->ai_addr, servinfo->ai_addrlen);
+
 }
 
 // send time request message to the server
 void sendTimeRequest(int soc, const time_request_t* timeRequest)
 {
+  for (size_t i = 0; i < sizeof(timeRequest); i++) {
+    send(soc, timeRequest, sizeof(timeRequest), 0);
 
-  send(soc, timeRequest, sizeof(timeRequest), 1);
+  }
+
+
 }
 
 // receive time respond message from the server and store it in timeRespond
 void receiveTimeRespond(int soc, time_respond_t* timeRespond)
 {
-  char* s;
 
-  s = (char*) recv(soc, timeRespond, sizeof(timeRespond), 1);
-  printf("%s\n", s);
+  for (size_t i = 0; i < sizeof(timeRespond->time); i++) {
+    timeRespond->time[i] =  recv(soc, timeRespond->time , sizeof(timeRespond->time),0);
+
+  }
+
+  printf("%s\n", timeRespond->time);
+
+
+
+
+
 }
+
+
 
 int main(void)
 {

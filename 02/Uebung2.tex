@@ -1,0 +1,52 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or epsÂ§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+\usepackage[latin1]{inputenc}r
+%SetFonts
+
+%SetFonts
+
+
+\title{Übung 2}
+\author{Malte Röder, Lukas Sparenberg, ...}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+\section{Aufgabe 1}
+a) 
+\\ \\ 
+Speicheradresse des Stacks: beginnend 0x7, endend mit der Zahl 4
+\\
+Speicheradresse des Heaps: 0x5, endend mit der Zahl 4
+\\ \\
+Speicheradresse des Stacks ist höher als die des Heaps. 
+Die erste und die letzte Stelle des Stacks und des Heaps der Ausgaben in unterschiedlichen Terminals sind jeweils gleich.
+\\ \\
+Für Stack und der Heap werden durch die Ausführung mittels zweier Terminals auch zwei Bereiche für den Ablauf der separat gestarteten Programme alloziiert, so dass nötige Ressourcen wie programm counter etc. genutzt werden können.
+\\ \\
+\\ \\
+b)
+\\ \\
+Beobachtung:
+\\ \\
+Speicheradressen sind entweder beide größer oder kleiner (im Vergleich der Terminals) 
+Synchrones Schreiben und Lesen von und in Register, durch 2 gleichzeitig gestartete Prozesse mit 60 sek. sleep in denen beide Prozesse im busy waiting Modus sind. 
+Mechanismus: Signalisierung.
+
+c)
+\\ \\
+Speicheradresse bleiben pro run Aufruf gleich.
+Durch die Nutzung des Debuggers, bleibt der Prozess im selben Bereich, während die normale Durchführung immer wieder neue Speicherbereiche anlegt.
+\\ \\
+\newpage
+d) 
+\\ \\
+Man würde erwarten, dass durch den Aufruf im rechten Terminal der Wert der Speicheradresse des linken Terminalaufrufs verändert bzw. überschrieben wird. Da der Prozess jedoch in einem anderen Block (PCB) wartet (sleep) kann auf diese Speicheradresse nicht zugegriffen werden.
+
+\end{document}  
